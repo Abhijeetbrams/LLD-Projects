@@ -4,6 +4,7 @@ import java.util.List;
 import Exception.InvalidDimensionsException;
 import Exception.PlayersNotFoundException;
 import Exception.WinningStrategiesNotFoundException;
+import Enum.GameState;
 
 public class Game {
     private Board board;
@@ -13,9 +14,9 @@ public class Game {
     private int timerLeft;
     private List<Move> moves;
     private GameState gameState;
-    private List<WinningStrategy> winningStrategies
+    private List<WinningStrategy> winningStrategies;
 
-    private Game(List<Player> players, Board board, int timerLeft, int dimensions,
+    private Game(List<Player> players, int dimensions,
                    List<WinningStrategy> winningStrategies) {
         // Private constructor to enforce the use of the builder
         this.board=new Board(dimensions);
@@ -53,7 +54,7 @@ public class Game {
             return this;
         }
 
-        public static Game build() throws PlayersNotFoundException, WinningStrategiesNotFoundException, InvalidDimensionsException {
+        public Game build() throws PlayersNotFoundException, WinningStrategiesNotFoundException, InvalidDimensionsException {
             if (players == null || players.size() < 2) {
                 throw new PlayersNotFoundException("Invalid game configuration");
             }
@@ -63,7 +64,7 @@ public class Game {
             if(dimensions <= 0) {
                 throw new InvalidDimensionsException("Invalid board dimensions");
             }
-            return new Game(players, board, timerLeft,dimensions);
+            return new Game(players,dimensions,winningStrategies);
         }
     }
 }
