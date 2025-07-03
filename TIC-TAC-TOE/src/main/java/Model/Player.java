@@ -2,6 +2,7 @@ package Model;
 
 import Enum.PlayerType;
 
+@lombok.Data
 public abstract class Player {
     private String name;
     private int gamerId;

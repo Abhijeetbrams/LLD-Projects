@@ -25,7 +25,7 @@ public class DiagonalWinningStrategy implements WinningStrategy{
         // Check for the anti-diagonal (top-right to bottom-left)
         if (row + col == board.getDimensions() - 1) {
             for(int i=0;i< board.getDimensions();i++){
-                Cell currentCell = board.getCells().get(row-i).get(col+i);
+                Cell currentCell = board.getCells().get(board.getDimensions()-i-1).get(i);
                 if (currentCell.getPlayer() == null || !currentCell.getPlayer().equals(cell.getPlayer())) {
                     isWinning = false;
                     break;

@@ -16,5 +16,12 @@ public class Cell {
         this.cellState = cellState; // Default state is empty
     }
 
+    public String printBoardCell() {
+        if (cellState == CellState.EMPTY) {
+            return "_";
+        } else {
+            return player.getSymbol().toString();
+        }
+    }
 
 }

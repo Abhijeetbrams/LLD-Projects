@@ -19,7 +19,10 @@ public class EasyBotPlayerStrategy implements BotPlayingStrategy {
         for (int row = 0; row < board.getCells().size(); row++) {
             for (int col = 0; col < board.getCells().get(row).size(); col++) {
                 if (board.getCells().get(row).get(col).getCellState() == CellState.EMPTY) {
-                    return new Cell(row, col, player, CellState.FILLED);
+                    Cell cell = new Cell(row, col, player, CellState.FILLED);
+                    // Update the board with the new cell
+                    board.getCells().get(row).set(col, cell);
+                    return cell;
                 }
             }
         }

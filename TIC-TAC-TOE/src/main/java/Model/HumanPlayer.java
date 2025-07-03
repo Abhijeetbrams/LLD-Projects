@@ -26,6 +26,9 @@ public class HumanPlayer extends Player{
         }while(!Validations.checkValidMove(board, row, col));
 
         // Create a new Cell with the given row and column
-        return new Cell(row, col, this, CellState.FILLED);
+        Cell cell=new Cell(row, col, this, CellState.FILLED);
+        // Update the board with the new cell
+        board.getCells().get(row).set(col, cell);
+        return cell;
     }
 }

@@ -7,6 +7,7 @@ import Exception.WinningStrategiesNotFoundException;
 import Enum.GameState;
 import Strategies.WinningStrategy;
 
+@lombok.Data
 public class Game {
     private Board board;
     private List<Player> players;
@@ -17,22 +18,69 @@ public class Game {
     private GameState gameState;
     private List<WinningStrategy> winningStrategies;
 
+
     private Game(List<Player> players, int dimensions,
-                   List<WinningStrategy> winningStrategies) {
+                 List<WinningStrategy> winningStrategies) {
         // Private constructor to enforce the use of the builder
-        this.board=new Board(dimensions);
+        System.out.println("Creating a new board with dimensions: " + dimensions);
+        this.board = new Board(dimensions);
         this.players = players;
         this.currentPlayer = players.get(0); // Start with the first player
         this.timerLeft = 60;
-        this.moves=new ArrayList();
+        this.moves = new ArrayList();
         this.winner = null;
         this.gameState = GameState.IN_PROGRESS;
-        this.winningStrategies=winningStrategies;
+        this.winningStrategies = winningStrategies;
     }
+
     public static GameBuilder getBuilder() {
         return new GameBuilder();
     }
 
+    public void printBoard() {
+        System.out.println("Current Board:");
+        board.display();
+    }
+
+    public void makeMove(){
+        Move move=null;
+        int len = players.size();
+        int index =0;
+        while(gameState==GameState.IN_PROGRESS){
+            Player currentPlayer = players.get(index%len);
+            Cell cell = currentPlayer.makeMove(board);
+            if(cell==null){
+               gameState=GameState.DRAW;
+                this.printBoard();
+               System.out.println("Game is a draw! No valid moves left.");
+               return;
+            }else{
+                move = new Move(currentPlayer, cell);
+                moves.add(move);
+                for(WinningStrategy winningStrategy : winningStrategies){
+                    if(winningStrategy.isWinningMove(board,cell)){
+                        winner = currentPlayer;
+                        gameState = GameState.CONCLUDED;
+                        this.printBoard();
+                        System.out.println("Player - " + winner + " has won the game!");
+                        return;
+                    }
+                }
+            }
+            index++;
+            this.printBoard();
+        }
+    }
+
+    public void undo() {
+        if (moves.isEmpty()) {
+            System.out.println("Nothing to undo");
+            return;
+        } else {
+            Move move = moves.remove(moves.size() - 1);
+            this.setCurrentPlayer(move.getPlayer());
+        }
+    }
 
     public static class GameBuilder{
         private List<Player> players;
@@ -64,6 +112,9 @@ public class Game {
             }
             if(dimensions <= 0) {
                 throw new InvalidDimensionsException("Invalid board dimensions");
+            }
+            if(players.size() != dimensions-1) {
+                throw new PlayersNotFoundException("Number of players must be equal to dimensions - 1");
             }
             return new Game(players,dimensions,winningStrategies);
         }
