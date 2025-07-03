@@ -5,6 +5,7 @@ import Exception.InvalidDimensionsException;
 import Exception.PlayersNotFoundException;
 import Exception.WinningStrategiesNotFoundException;
 import Enum.GameState;
+import Strategies.WinningStrategy;
 
 public class Game {
     private Board board;

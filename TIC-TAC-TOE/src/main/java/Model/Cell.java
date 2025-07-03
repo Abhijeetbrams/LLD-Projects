@@ -9,11 +9,11 @@ public class Cell {
     private Player player;
     private CellState cellState;
 
-    public Cell(int row, int col, Player player) {
+    public Cell(int row, int col, Player player, CellState cellState) {
         this.row = row;
         this.col = col;
         this.player = player;
-        this.cellState = CellState.EMPTY; // Default state is empty
+        this.cellState = cellState; // Default state is empty
     }
 
 

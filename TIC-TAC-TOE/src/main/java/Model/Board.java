@@ -2,6 +2,7 @@ package Model;
 
 import java.util.ArrayList;
 import java.util.List;
+import Enum.CellState;
 
 @lombok.Data
 public class Board {
@@ -14,7 +15,7 @@ public class Board {
         for(int i=0;i<dimensions;i++){
             List<Cell> row = new ArrayList<>();
             for(int j=0;j<dimensions;j++){
-                row.add(new Cell(i, j, null)); // Initialize each cell with null player
+                row.add(new Cell(i, j, null, CellState.EMPTY)); // Initialize each cell with null player
             }
             cells.add(row);
         }

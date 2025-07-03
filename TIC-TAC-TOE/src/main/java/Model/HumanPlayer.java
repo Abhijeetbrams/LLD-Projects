@@ -3,18 +3,16 @@ import Util.Validations;
 
 import java.util.Scanner;
 import Enum.PlayerType;
+import Enum.CellState;
 
 
 public class HumanPlayer extends Player{
-    private int ranking;
-    private String email;
-
+    int ranking;
     Scanner scanner = new Scanner(System.in);
 
-    public HumanPlayer(String name, int gamerId, PlayerType playerType, Character symbol, int ranking, String email) {
-        super(name, gamerId, playerType, symbol);
+    public HumanPlayer(String name, int gamerId, int ranking, Character symbol) {
+        super(name, gamerId, PlayerType.HUMAN, symbol);
         this.ranking = ranking;
-        this.email = email;
     }
 
     @Override
@@ -28,6 +26,6 @@ public class HumanPlayer extends Player{
         }while(!Validations.checkValidMove(board, row, col));
 
         // Create a new Cell with the given row and column
-        return new Cell(row, col, this);
+        return new Cell(row, col, this, CellState.FILLED);
     }
 }
