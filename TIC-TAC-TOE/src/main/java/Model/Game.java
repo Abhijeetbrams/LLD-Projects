@@ -1,11 +1,14 @@
 package Model;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
+
 import Exception.InvalidDimensionsException;
 import Exception.PlayersNotFoundException;
 import Exception.WinningStrategiesNotFoundException;
 import Enum.GameState;
 import Strategies.WinningStrategy;
+import Enum.CellState;
 
 @lombok.Data
 public class Game {
@@ -47,6 +50,24 @@ public class Game {
         int len = players.size();
         int index =0;
         while(gameState==GameState.IN_PROGRESS){
+            while(!moves.isEmpty()){
+                System.out.println("Do you want to undo the last move? Type (Y/N)");
+                Scanner sc = new Scanner(System.in);
+                String choice = sc.nextLine();
+
+                if(!choice.equalsIgnoreCase("Y") && !choice.equalsIgnoreCase("N")){
+                    System.out.println("Please enter a valid choice");
+                    continue;
+                }
+
+                if(choice.equalsIgnoreCase("N") || moves.isEmpty()){
+                    break;
+                }else{
+                    this.undo();
+                    System.out.println("Last move undone.");
+                    index--;
+                }
+            }
             Player currentPlayer = players.get(index%len);
             Cell cell = currentPlayer.makeMove(board);
             if(cell==null){
@@ -57,27 +78,32 @@ public class Game {
             }else{
                 move = new Move(currentPlayer, cell);
                 moves.add(move);
-                for(WinningStrategy winningStrategy : winningStrategies){
-                    if(winningStrategy.isWinningMove(board,cell)){
-                        winner = currentPlayer;
-                        gameState = GameState.CONCLUDED;
-                        this.printBoard();
-                        System.out.println("Player - " + winner + " has won the game!");
-                        return;
-                    }
-                }
+                this.checkForWinner(cell);
             }
             index++;
             this.printBoard();
         }
     }
 
+    private void checkForWinner(Cell cell) {
+        for(WinningStrategy winningStrategy : winningStrategies){
+            if(winningStrategy.isWinningMove(board,cell)){
+                winner = currentPlayer;
+                gameState = GameState.CONCLUDED;
+                this.printBoard();
+                System.out.println("Player - " + winner + " has won the game!");
+                return;
+            }
+        }
+    }
     public void undo() {
         if (moves.isEmpty()) {
             System.out.println("Nothing to undo");
             return;
         } else {
             Move move = moves.remove(moves.size() - 1);
+            board.getCells().get(move.getCell().getRow()).set(move.getCell().getCol(),
+                    new Cell(move.getCell().getRow(), move.getCell().getCol(), null, CellState.EMPTY));
             this.setCurrentPlayer(move.getPlayer());
         }
     }
