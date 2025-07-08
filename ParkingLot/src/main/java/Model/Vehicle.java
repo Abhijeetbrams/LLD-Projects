@@ -1,9 +1,20 @@
 package Model;
 
 import Enum.VehicleType;
+import jakarta.persistence.Entity;
+import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@lombok.Data
-public class Vehicle {
+@Getter
+@Setter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+// JPA requires this, since it uses reflection to instantiate the class and it forces
+// to create a no-arg constructor,
+// thus to meet JPA's requirement without exposing the constructor unnecessarily.
+@Entity(name="Vehicle")
+public class Vehicle extends BaseModel{
     public String vehicleNumber;
     public VehicleType vehicleType;
     public int vehicleSize;
