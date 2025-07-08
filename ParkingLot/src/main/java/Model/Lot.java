@@ -1,11 +1,13 @@
 package Model;
 
+import Enum.OccupancyStatus;
 import Enum.OperationalStatus;
 import Enum.VehicleType;
+import Enum.*;
 
 @lombok.Data
 public class Lot {
-    private String LotId;
+    private Integer LotId;
     private Floor Floor;
     private VehicleType AllowedVehicleType;
     private OperationalStatus operationalStatus;
@@ -13,11 +15,12 @@ public class Lot {
     private Vehicle vehicle;
     private OccupancyStatus occupancyStatus;
 
-    public Lot(String lotId, Floor floor, VehicleType allowedVehicleType, OperationalStatus operationalStatus, int size) {
+    public Lot(Integer lotId, Floor floor, VehicleType allowedVehicleType, OccupancyStatus occupancyStatus,OperationalStatus operationalStatus, int size) {
         this.LotId = lotId;
         this.Floor = floor;
         this.AllowedVehicleType = allowedVehicleType;
         this.operationalStatus = operationalStatus;
+        this.occupancyStatus = occupancyStatus;
         this.size = size;
     }
 }

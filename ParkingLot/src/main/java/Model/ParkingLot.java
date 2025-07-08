@@ -10,8 +10,6 @@ public class ParkingLot {
     List<Gate> gates;
     List<Ticket> tickets;
     List<Floor> floor;
-    List<AllotmentStrategy> allotmentStrategies;
-    List<ParkingFeeStrategy> parkingStrategies;
 
     public ParkingLot(String parkingLotName, String parkingLotAddress) {
         this.parkingLotName = parkingLotName;
@@ -20,7 +18,5 @@ public class ParkingLot {
         this.gates = new ArrayList<>();
         this.tickets = new ArrayList<>();
         this.floor = new ArrayList<>();
-        this.parkingStrategies = new ArrayList<>();
-        this.allotmentStrategies = new ArrayList<>();
     }
 }

@@ -28,7 +28,7 @@ public class Ticket {
         this.floor = floor;
         this.entryTime = new Timestamp(System.currentTimeMillis());
     }
-    public Builder getBuilder() {
+    public static Builder getBuilder() {
         return new Builder();
     }
 

@@ -10,6 +10,11 @@ public class Floor {
     private List<Lot> parkingLots;
     private OperationalStatus operationalStatus;
 
+    public Floor(int floorNo) {
+        this.floorNo = floorNo;
+        this.operationalStatus = OperationalStatus.OPERATIONAL; // Default status
+    }
+
     public Floor(int floorNo, List<Lot> parkingLots, OperationalStatus operationalStatus) {
         this.floorNo = floorNo;
         this.parkingLots = parkingLots;

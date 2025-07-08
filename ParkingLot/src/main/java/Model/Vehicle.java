@@ -10,7 +10,8 @@ public class Vehicle {
     public String ownerName;
     public String ownerPhoneNumber;
 
-    public void Vehicle(String vehicleNumber, VehicleType vehicleType, int vehicleSize, String ownerName, String ownerPhoneNumber) {
+
+    public Vehicle(String vehicleNumber, VehicleType vehicleType, int vehicleSize, String ownerName, String ownerPhoneNumber) {
         this.vehicleNumber = vehicleNumber;
         this.vehicleType = vehicleType;
         this.vehicleSize = vehicleSize;
