@@ -1,6 +1,5 @@
 package Model;
 
-import Enum.Status;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
@@ -9,10 +8,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class ShowSeatMap extends BaseModel{
-    @ManyToOne
-    private Seat seat;
+public class ShowSeatTypeMap extends BaseModel{
     @ManyToOne
     private Show show;
-    private Status status;
+    @ManyToOne
+    private SeatType seatType;
+    private double price;
 }

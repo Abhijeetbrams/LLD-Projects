@@ -1,15 +1,21 @@
 package Model;
 
-import java.util.ArrayList;
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
-public class City {
+import java.util.ArrayList;
+import java.util.List;
+
+
+@Getter
+@Setter
+@Entity
+public class City extends BaseModel {
     private int cityId;
     private String cityName;
+    @OneToMany
     private List<Theatre> theatres;
 
-    public City(int cityId, String cityName, List<Theatre> theatres) {
-        this.cityId = cityId;
-        this.cityName = cityName;
-        this.theatres = new ArrayList<>();
-    }
 }

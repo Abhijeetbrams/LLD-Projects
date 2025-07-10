@@ -1,19 +1,25 @@
 package Model;
 
 import java.util.List;
+import Enum.FormatType;
+import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
 
-public class Screen {
+@Getter
+@Setter
+@Entity
+public class Screen extends BaseModel {
     private Integer screenId;
-    private FormatType formatType;
-    private List<Show> shows;
-    private List<Seat> seats;
-    private Theatre theatre;
 
-    public Screen(Integer screenId, FormatType formatType, List<Show> shows, List<Seat> seats, Theatre theatre) {
-        this.screenId = screenId;
-        this.formatType = formatType;
-        this.shows = shows;
-        this.seats = seats;
-        this.theatre = theatre;
-    }
+    @Enumerated(EnumType.ORDINAL)
+    private FormatType formatType;
+
+    @OneToMany(mappedBy = "screen")
+    private List<Seat> seats;
+
+
 }

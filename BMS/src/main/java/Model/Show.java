@@ -1,23 +1,26 @@
 package Model;
 
+import jakarta.persistence.Entity;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
+import lombok.Getter;
+import lombok.Setter;
+
 import java.sql.Timestamp;
 
-public class Show {
+@Getter
+@Setter
+@Entity
+public class Show extends BaseModel{
     private Integer showId;
     private String showName;
     private Timestamp startTime;
     private Timestamp endTime;
+    @ManyToOne
     private Screen screen;
+    @OneToOne
     private Movie movie;
 
-    public Show(Integer showId, String showName, Timestamp startTime, Timestamp endTime, Screen screen, Movie movie) {
-        this.showId = showId;
-        this.showName = showName;
-        this.startTime = startTime;
-        this.endTime = endTime;
-        this.screen = screen;
-        this.movie = movie;
-    }
 
 
 }

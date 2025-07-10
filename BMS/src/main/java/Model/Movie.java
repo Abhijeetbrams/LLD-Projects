@@ -1,19 +1,23 @@
 package Model;
 
-public class Movie {
+import jakarta.persistence.Entity;
+import jakarta.persistence.OneToMany;
+import lombok.Getter;
+import lombok.Setter;
+
+import java.util.List;
+
+
+@Getter
+@Setter
+@Entity
+public class Movie extends BaseModel{
     private Integer movieId;
     private String title;
     private String runtime;
     private String genre;
-    private List<Actor> actors;
+    private List<String> actors;
     private double rating;
 
-    public Movie(Integer movieId, String title, String runtime, String genre, List<Actor> actors, double rating) {
-        this.movieId = movieId;
-        this.title = title;
-        this.runtime = runtime;
-        this.genre = genre;
-        this.actors = actors;
-        this.rating = rating;
-    }
+
 }

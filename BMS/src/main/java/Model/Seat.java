@@ -1,19 +1,22 @@
 package Model;
 
-public class Seat {
+import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@Entity
+public class Seat extends BaseModel{
     private Integer seatId;
     private String seatNumber;
-    private Screen screen;
+    @ManyToOne(cascade = CascadeType.ALL)
     private SeatType seatType;
+
+    @ManyToOne
+    private Screen screen;
     private int column;
     private int row;
 
-    public Seat(Integer seatId, String seatNumber, Screen screen, int column, int row) {
-        this.seatId = seatId;
-        this.seatNumber = seatNumber;
-        this.screen = screen;
-        this.seatType = SeatType.REGULAR; // Default value
-        this.column = column;
-        this.row = row;
-    }
+
 }
