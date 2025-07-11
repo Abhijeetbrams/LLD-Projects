@@ -21,6 +21,7 @@ public class Booking extends BaseModel {
 
     @Enumerated(EnumType.ORDINAL) // Using ORDINAL to store the enum as an integer
     private BookingStatus bookingStatus;
+
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "booking")
     private List<Payment> payments;
 
