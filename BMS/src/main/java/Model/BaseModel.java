@@ -21,7 +21,7 @@ import java.util.Date;
 public abstract class BaseModel { // Made the class abstract (optional but recommended for base models)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
     @CreationTimestamp
     private Date createdAt;
     @UpdateTimestamp

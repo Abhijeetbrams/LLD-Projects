@@ -1,10 +1,12 @@
 package Model;
 
-import Enum.Status;
+import Enum.ShowSeatStatus;
 import jakarta.persistence.Entity;
 import jakarta.persistence.ManyToOne;
 import lombok.Getter;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -14,5 +16,6 @@ public class ShowSeatMap extends BaseModel{
     private Seat seat;
     @ManyToOne
     private Show show;
-    private Status status;
+    private ShowSeatStatus showSeatStatus;
+    private Date lockedAt;
 }

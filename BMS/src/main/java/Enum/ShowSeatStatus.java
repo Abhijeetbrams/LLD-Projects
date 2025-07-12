@@ -1,6 +1,6 @@
 package Enum;
 
-public enum Status {
+public enum ShowSeatStatus {
     OCCUPIED,
     VACANT,
     LOCKED
