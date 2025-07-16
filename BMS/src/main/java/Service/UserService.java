@@ -33,6 +33,7 @@ public class UserService {
 
     public boolean login(String email, String password) throws InvalidPassword {
 
+        // Check if the user exists with the given email
         Optional<User> optionalUser = userRepository.findByEmail(email);
         if (!optionalUser.isPresent()) {
             throw new RuntimeException();
