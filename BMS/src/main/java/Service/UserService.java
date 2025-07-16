@@ -39,6 +39,7 @@ public class UserService {
         }
 
         User user = optionalUser.get();
+        // Check if the password matches
         if(!password.equals(user.getPassword())){
             throw new InvalidPassword("Password is invalid");
         }
