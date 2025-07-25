@@ -16,6 +16,7 @@ public class UserService {
 
     public User signUp(SignUpUserRequestDto request) {
         // we want to make sure this is a new user.
+        // If the user already exists with the given email, throw an exception
         Optional<User> user = userRepository.findByEmail(request.getEmail());
         if (user.isPresent()) {
             throw new RuntimeException();
